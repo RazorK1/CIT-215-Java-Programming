@@ -1,0 +1,19 @@
+ //[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+ tasks.withType(JavaCompile).configureEach {
+   options.encoding = 'UTF-8'
+ }
+ java {
+   toolchain {
+     languageVersion = JavaLanguageVersion.of(21) // or your version of Java
+   }
+ }
+
+ eclipse.project.name = appName + '-core'
+
+dependencies {
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+  if(enableGraalNative == 'true') {
+    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
+  }
+}
